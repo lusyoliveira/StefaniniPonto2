@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Funcionario</h2>
+
+@Html.ActionLink("Novo Funcionario", "CadastrarFuncionario", "Funcionario")
+
+<table class="table">
+    <thead>
+        <tr>
+            <th><input type="checkbox" title="Seleciona Todos" onclick="selecionaTodos(this, 'chkFuncionario')" /></th>
+            <th>Nome</th>
+            <th>Salario</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (ViewBag.PontoList == null)
+            {
+                <tr>
+                    <td colspan="5">Não existe cliente cadastrado</td>
+                </tr>
+            }
+            else
+            {
+                foreach (Model.Funcionario funcionario in ViewBag.PontoList)
+                {
+                    string onclick = "onclick=editarCliente(" + funcionario.Id + ")";
+
+                    <tr>
+                        <td><input type="checkbox" name="chkCliente" value="@funcionario.Id" /></td>
+                        <td @onclick>@funcionario.Nome</td>
+                        <td @onclick>@funcionario.Salario</td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
